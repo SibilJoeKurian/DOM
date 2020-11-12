@@ -15,20 +15,24 @@ const todos = [{
     completed: true
 }]
 
-filter_todo=(todos,value)=>{
-    return todos.filter((todo)=>{
+todos.forEach((todo) => {
+    let p=document.createElement('p')
+    p.textContent=todo.text
+    document.querySelector('#todo-list').appendChild(p)
+})
+
+filter_todo = (todos, value) => {
+    return todos.filter((todo) => {
         return (todo.text).includes(value)
     })
 }
-document.querySelector('button').addEventListener('click',(e)=>{
-    document.querySelector('#todo-list').innerHTML=''
-    let text_box_value=document.getElementById('inputbox').value;
-    let todos_value=filter_todo(todos,text_box_value)
-    todos_value.forEach((todo)=>{
+
+document.querySelector('#inputbox').addEventListener('input',(e)=>{
+    document.querySelector('#todo-list').innerHTML='';
+    (filter_todo(todos,e.target.value)).forEach((todo)=>{
         let p=document.createElement('p')
         p.textContent=todo.text;
         document.querySelector('#todo-list').appendChild(p)
     })
-    
 })
 //console.log(filter_todo(todos,'food'))
